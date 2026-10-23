@@ -11,14 +11,27 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+//2. automatiza la serialización/deserialización de los objetos de tipo Mecánico o de tipo Revisión
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "tipo"
+)
 
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Mecanico.class, name = "Mecanico"),
+    @JsonSubTypes.Type(value = Revision.class, name = "Revision")
+})
 public abstract class Trabajo {
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final float FACTOR_DIA = 10F;
 
     private Cliente cliente;
     private Vehiculo vehiculo;
+    // 1. los atributos LocalDate se guarden y lean correctamente del fichero json
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaInicio;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaFin;
     private int horas;
 
@@ -127,6 +140,7 @@ public abstract class Trabajo {
     }
 
 
+    @JsonIgnore
     public float getPrecio() {
         return getPrecioFijo() + getPrecioEspecifico();
     }
@@ -139,6 +153,7 @@ public abstract class Trabajo {
         return (estaCerrado()) ? (int) ChronoUnit.DAYS.between(fechaInicio, fechaFin) : 0;
     }
 
+    @JsonIgnore
     public abstract float getPrecioEspecifico();
 
     @Override
