@@ -1,0 +1,16 @@
+[ {
+  "tipo" : "Revision",
+  "cliente" : {
+    "nombre" : "Belen",
+    "dni" : "77239703E",
+    "telefono" : "668697246"
+  },
+  "vehiculo" : {
+    "marca" : "Seat",
+    "modelo" : "Ibiza",
+    "matricula" : "2345GGT"
+  },
+  "fechaInicio" : "2026-11-08",
+  "fechaFin" : "2026-11-08",
+  "horas" : 0
+} ]
