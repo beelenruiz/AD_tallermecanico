@@ -35,7 +35,7 @@ public class Vehiculos implements IVehiculos {
     }
 
     public List<Vehiculo> leer() {
-        if (!file.exists()){
+        if (!file.exists() || file.length() == 0){
             return new ArrayList<>();
         }
 

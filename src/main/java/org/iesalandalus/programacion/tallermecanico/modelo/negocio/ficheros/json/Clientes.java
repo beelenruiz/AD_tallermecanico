@@ -35,7 +35,7 @@ public class Clientes implements IClientes {
     }
 
     public List<Cliente> leer() {
-        if (!file.exists()) {
+        if (!file.exists() || file.length() == 0) {
             return new ArrayList<>();
         }
 
